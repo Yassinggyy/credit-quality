@@ -1,30 +1,19 @@
-import os
-import math
+HIGH_THRESHOLD = 0.6
+MEDIUM_THRESHOLD = 0.3
 
 
-def calculate_risk(income, debt, age):
+def calculate_risk(income, debt, age=None):
+    """Retourne le niveau de risque : HIGH, MEDIUM, LOW, ou -1 si revenu invalide.
+
+    age est conservé pour compatibilité mais n'intervient pas dans le calcul.
+    """
     if income <= 0:
         return -1
 
     ratio = debt / income
 
-    if ratio > 0.6:
+    if ratio > HIGH_THRESHOLD:
         return "HIGH"
-    elif ratio > 0.3:
+    if ratio > MEDIUM_THRESHOLD:
         return "MEDIUM"
-    else:
-        return "LOW"
-
-
-def calculate_risk2(income, debt, age):
-    if income <= 0:
-        return -1
-
-    ratio = debt / income
-
-    if ratio > 0.6:
-        return "HIGH"
-    elif ratio > 0.3:
-        return "MEDIUM"
-    else:
-        return "LOW"
+    return "LOW"
